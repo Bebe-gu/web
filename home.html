@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            background: url('./assets/images/bg.jpeg') no-repeat 0px 0px;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            -moz-background-size: 100% 100%;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        #homeDiv {
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 400px;
+            background-color: rgba(75, 81, 95, 0.3);
+            box-shadow: 7px 7px 17px rgba(52, 56, 66, 0.5);
+            border-radius: 5px;
+            color: aliceblue;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .welcome-message {
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            border-color: cornsilk;
+            background-color: rgba(100, 149, 237, .7);
+            color: aliceblue;
+            border-style: hidden;
+            border-radius: 5px;
+            width: 120px;
+            height: 40px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .button:hover {
+            background-color: rgba(70, 130, 180, .8);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="homeDiv">
+        <h1>欢迎来到主页</h1>
+        <div class="welcome-message" id="welcomeMessage">加载中...</div>
+
+        <a href="javascript:void(0);" onclick="logout()">
+            <input type="button" class="button" value="注销">
+        </a>
+    </div>
+
+    <script>
+        // 获取已保存的用户数据
+        const savedData = localStorage.getItem('userRegistrationData');
+        const formData = savedData ? JSON.parse(savedData) : null;
+
+        if (formData) {
+            // 显示欢迎信息
+            document.getElementById('welcomeMessage').innerText = `欢迎，${formData.username}！`;
+        } else {
+            // 如果没有找到用户数据，重定向到登录页面
+            alert('未找到用户数据，请先登录！');
+            window.location.href = 'login.html';
+        }
+
+        // 注销功能
+        function logout() {
+            localStorage.removeItem('userRegistrationData');
+            alert('注销成功！');
+            window.location.href = 'login.html'; // 注销后跳转到登录页面
+        }
+    </script>
+</body>
+
+</html>
